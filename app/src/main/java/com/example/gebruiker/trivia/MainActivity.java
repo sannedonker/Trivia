@@ -41,4 +41,11 @@ public class MainActivity extends AppCompatActivity implements QuestionRequest.C
         intent.putExtra("questions", questions);
         startActivity(intent);
     }
+
+    public void go_to_highscore(View view) {
+
+        // go to highscore screen
+        Intent intent = new Intent(MainActivity.this, HighScoreActivity.class);
+        startActivity(intent);
+    }
 }
