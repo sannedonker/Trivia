@@ -60,7 +60,6 @@ public class QuestionActivity extends AppCompatActivity {
             points += 1;
         }
 
-        // TODO of de progressbar doen of deze counter printen met counter/10
         counter += 1;
 
         if (counter < nmbr_questions) {
@@ -95,5 +94,13 @@ public class QuestionActivity extends AppCompatActivity {
             intent.putExtras(extras);
             startActivity(intent);
         }
+    }
+
+    // makes sure that when pressed back the user goes to the MainActivity screen
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

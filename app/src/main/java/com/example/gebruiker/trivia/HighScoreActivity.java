@@ -86,4 +86,12 @@ public class HighScoreActivity extends AppCompatActivity implements HighScoreReq
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 
+    // makes sure that when pressed back the user goes to the MainActivity screen
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(HighScoreActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }

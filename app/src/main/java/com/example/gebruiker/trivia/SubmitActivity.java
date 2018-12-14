@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class SubmitActivity extends AppCompatActivity {
+public class SubmitActivity extends AppCompatActivity implements PostPlayer.Callback {
 
     private String name, score_string, time_string;
 
@@ -32,20 +34,50 @@ public class SubmitActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.time)).setText("Time: " + time_string);
     }
 
-    // submits score and redirects to the highscore screen
+    // submits score
     public void submit_score(View view) {
 
+        // checks if a name was entered
         name = ((EditText) findViewById(R.id.name)).getText().toString();
         if (name.length() > 0) {
 
-            // TODO safe everything in the thing so it can be printed
+            // post player in the JSON and disable button so they can't submit multiple times
+            PostPlayer player = new PostPlayer(name, score_string, time_string,
+                    getApplicationContext(), SubmitActivity.this);
+            Button submit_button = findViewById(R.id.submit);
+            submit_button.setEnabled(false);
 
-            // go to highscore screen
-            Intent intent = new Intent(SubmitActivity.this, HighScoreActivity.class);
-            startActivity(intent);
         }
         else {
-            // TODO maak toast die zegt dat ze naam moeten invullen
+            Toast.makeText(this,"Please enter (nick)name",Toast.LENGTH_LONG).show();
         }
+    }
+
+    // if submit was succesfull
+    @Override
+    public void gotPost(String message) {
+
+        // enable button again
+        Button submit_button = findViewById(R.id.submit);
+        submit_button.setEnabled(true);
+
+        // go to highscore screen
+        Intent intent = new Intent(SubmitActivity.this, HighScoreActivity.class);
+        startActivity(intent);
+
+    }
+
+    // if submit was unsuccesfull
+    @Override
+    public void gotPostError(String message) {
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+    }
+
+    // makes sure that when pressed back the user goes to the MainActivity screen
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(SubmitActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
