@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,9 +29,10 @@ public class MainActivity extends AppCompatActivity implements QuestionRequest.C
         questions = question_items;
     }
 
+    // show errormessage in case something went wrong
     @Override
     public void gotQuestionError(String message) {
-        //TODO moet dit eigenlijk?
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements QuestionRequest.C
 
         // go to highscore screen
         Intent intent = new Intent(MainActivity.this, HighScoreActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

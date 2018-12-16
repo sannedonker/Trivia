@@ -101,6 +101,7 @@ public class QuestionActivity extends AppCompatActivity {
     public void onBackPressed()
     {
         Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

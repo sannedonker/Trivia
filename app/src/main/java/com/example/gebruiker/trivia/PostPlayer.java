@@ -18,6 +18,7 @@ public class PostPlayer implements Response.ErrorListener, Response.Listener {
     Callback activity;
 
 
+    // request JSON
     public PostPlayer(String name, String score, String time, Context context, Callback activity) {
         this.name = name;
         this.score = score;
@@ -36,7 +37,7 @@ public class PostPlayer implements Response.ErrorListener, Response.Listener {
         void gotPostError(String message);
     }
 
-
+    // show error message when request was unsuccesfull
     @Override
     public void onErrorResponse(VolleyError error) {
         activity.gotPostError(error.getMessage());
@@ -54,6 +55,7 @@ public class PostPlayer implements Response.ErrorListener, Response.Listener {
             super(method, url, listener, errorListener);
         }
 
+        // add parameters
         @Override
         protected Map<String, String> getParams() {
             Map<String, String> params = new HashMap<>();

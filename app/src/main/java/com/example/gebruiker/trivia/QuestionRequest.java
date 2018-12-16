@@ -24,11 +24,7 @@ public class QuestionRequest implements Response.Listener<JSONObject>, Response.
         this.context = context;
     }
 
-    public interface Callback {
-        void gotQuestion(ArrayList<QuestionItem> questions);
-        void gotQuestionError(String message);
-    }
-
+    // load questions from online JSON
     void getQuestion(Callback activity) {
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -41,6 +37,12 @@ public class QuestionRequest implements Response.Listener<JSONObject>, Response.
         this.activity = activity;
     }
 
+    public interface Callback {
+        void gotQuestion(ArrayList<QuestionItem> questions);
+        void gotQuestionError(String message);
+    }
+
+    // show error message when something went wrong
     @Override
     public void onErrorResponse(VolleyError error) {
         activity.gotQuestionError(error.getMessage());
@@ -48,6 +50,8 @@ public class QuestionRequest implements Response.Listener<JSONObject>, Response.
 
     @Override
     public void onResponse(JSONObject response){
+
+        // set JSONArray
         JSONArray results = null;
         try {
             results = response.getJSONArray("results");
@@ -55,6 +59,7 @@ public class QuestionRequest implements Response.Listener<JSONObject>, Response.
             e.printStackTrace();
         }
 
+        // fill ArrayList with questions and answers
         ArrayList<QuestionItem> questions = new ArrayList<QuestionItem>(results.length());
         for (int position = 0; position < results.length(); position++){
             try {

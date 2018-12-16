@@ -26,11 +26,8 @@ public class HighScoreActivity extends AppCompatActivity implements HighScoreReq
 
     }
 
-
     @Override
     public void gotHighScore(ArrayList<Player> players_list) {
-
-        Log.d("test", "gotHighScore: ik kom hier");
 
         // sort the players on score (from high to low)
         Collections.sort(players_list, new Comparator<Player>() {
@@ -91,6 +88,7 @@ public class HighScoreActivity extends AppCompatActivity implements HighScoreReq
     public void onBackPressed()
     {
         Intent intent = new Intent(HighScoreActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

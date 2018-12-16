@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Player implements Serializable {
 
-    //TODO straks worden dit int en long voor score en time!!!1
     private String name, score, time;
 
     public Player(String name, String score, String time) {

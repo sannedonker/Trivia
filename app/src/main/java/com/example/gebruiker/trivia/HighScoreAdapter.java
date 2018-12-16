@@ -15,6 +15,7 @@ public class HighScoreAdapter extends ArrayAdapter {
     private ArrayList<Player> players;
     Context context;
 
+    // constructor
     public HighScoreAdapter(Context context, int resource, ArrayList<Player> players, Context context1) {
         super(context, resource, players);
         this.players = players;

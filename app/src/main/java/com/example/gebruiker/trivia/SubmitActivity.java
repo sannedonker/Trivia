@@ -13,6 +13,7 @@ public class SubmitActivity extends AppCompatActivity implements PostPlayer.Call
 
     private String name, score_string, time_string;
 
+    // gets and sets score and time
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,9 @@ public class SubmitActivity extends AppCompatActivity implements PostPlayer.Call
                     getApplicationContext(), SubmitActivity.this);
             Button submit_button = findViewById(R.id.submit);
             submit_button.setEnabled(false);
+            Toast.makeText(this, "Please wait a few seconds for the highscores", Toast.LENGTH_LONG
+
+            ).show();
 
         }
         else {

@@ -1,7 +1,6 @@
 package com.example.gebruiker.trivia;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -14,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class HighScoreRequest implements Response.Listener<JSONArray>, Response.ErrorListener{
 
@@ -31,6 +29,7 @@ public class HighScoreRequest implements Response.Listener<JSONArray>, Response.
         void gotHighScoreError(String message);
     }
 
+    // get a jsonarray with the highscore list
     void getHighScore(HighScoreRequest.Callback activity) {
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -40,19 +39,16 @@ public class HighScoreRequest implements Response.Listener<JSONArray>, Response.
         queue.add(jsonArrayRequest);
 
         this.activity = activity;
-
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
         activity.gotHighScoreError(error.getMessage());
-        Log.d("test", "onErrorResponse: jeej ik had het goed");
     }
 
+    // set players with their info in the players list
     @Override
     public void onResponse(JSONArray response){
-
-        Log.d("test", "onResponse: kom ik hier?????????");
 
         ArrayList<Player> players = new ArrayList<Player>();
         for (int position = 0; position < response.length(); position++) {
@@ -62,10 +58,8 @@ public class HighScoreRequest implements Response.Listener<JSONArray>, Response.
                 String score = player.getString("score");
                 String time = player.getString("time");
                 players.add(new Player(name, score, time));
-                Log.d("test", "yaayyyy");
             } catch (JSONException e){
                 e.printStackTrace();
-                Log.d("test", "booooeeeee");
             }
         }
 
